@@ -9,4 +9,5 @@ COPY ./odoo.conf /etc/odoo/odoo.conf
 
 # Override the official entrypoint so it doesn't force the DB port to match Render's web PORT
 ENTRYPOINT ["odoo"]
-CMD ["-c", "/etc/odoo/odoo.conf"]
+# Automatically initialize the default 'postgres' database on startup to bypass the Web UI creation screen
+CMD ["-c", "/etc/odoo/odoo.conf", "-d", "postgres", "-i", "base"]
