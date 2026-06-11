@@ -20,4 +20,4 @@ echo "PostgreSQL is fully ready!"
 # 4. Start Odoo as the 'odoo' user
 # We don't use -i base because the database is local, meaning the standard Web UI Database Creation screen will work perfectly!
 echo "Starting Odoo..."
-su - odoo -c "odoo -c /etc/odoo/odoo.conf --http-port ${PORT:-8069}"
+su -s /bin/bash odoo -c "odoo -c /etc/odoo/odoo.conf --http-port ${PORT:-8069}"
