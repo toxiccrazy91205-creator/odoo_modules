@@ -2,8 +2,11 @@ FROM odoo:19.0
 
 USER root
 
-# Install PostgreSQL inside the container (version 18 matches the pre-installed client)
-RUN apt-get update && apt-get install -y postgresql-18 && rm -rf /var/lib/apt/lists/*
+# Add official Postgres repository and install PostgreSQL 18
+RUN apt-get update && apt-get install -y curl ca-certificates gnupg && \
+    curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ noble-pgdg main" > /etc/apt/sources.list.d/postgresql.list && \
+    apt-get update && apt-get install -y postgresql-18 && rm -rf /var/lib/apt/lists/*
 
 # Copy Odoo Config
 COPY ./odoo.conf /etc/odoo/odoo.conf
