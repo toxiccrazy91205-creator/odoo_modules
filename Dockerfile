@@ -2,12 +2,27 @@ FROM odoo:19.0
 
 USER root
 
-USER odoo
+# Install PostgreSQL inside the container
+RUN apt-get update && apt-get install -y postgresql postgresql-client && rm -rf /var/lib/apt/lists/*
 
-COPY ./boiler_costing_engine /mnt/extra-addons/boiler_costing_engine
+# Copy Odoo Config
 COPY ./odoo.conf /etc/odoo/odoo.conf
 
-# Override the official entrypoint so it doesn't force the DB port to match Render's web PORT
-ENTRYPOINT []
-# FREE TIER HACK: Initialize the DB and intentionally stop the server.
-CMD odoo -c /etc/odoo/odoo.conf --db_host "$PGHOST" --db_port "$PGPORT" --db_user "$PGUSER" --db_password "${PGPASSWORD:-$PASSWORD}" --http-port "${PORT:-8069}"
+# Copy the custom startup script
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Copy both custom modules into the addons folder
+COPY ./boiler_costing_engine /mnt/extra-addons/boiler_costing_engine
+COPY ./crm_inquiry_management /mnt/extra-addons/crm_inquiry_management
+
+# Ensure correct permissions for the odoo user
+RUN chown -R odoo:odoo /mnt/extra-addons /etc/odoo/odoo.conf
+
+# The container MUST run as root initially to start the Postgres service. 
+# The start.sh script will safely switch to the 'odoo' user before running Odoo.
+USER root
+
+# Define the start script as the entrypoint
+ENTRYPOINT ["/start.sh"]
+CMD []
