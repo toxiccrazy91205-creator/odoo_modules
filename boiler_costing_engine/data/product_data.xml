@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Materials -->
+        <record id="product_material_ms_plate" model="product.template">
+            <field name="name">MS Plate</field>
+            <field name="type">consu</field>
+            <field name="standard_price">50.0</field>
+        </record>
+        <record id="product_material_ss_plate" model="product.template">
+            <field name="name">SS Plate</field>
+            <field name="type">consu</field>
+            <field name="standard_price">150.0</field>
+        </record>
+        <record id="product_material_tubes" model="product.template">
+            <field name="name">Tubes</field>
+            <field name="type">consu</field>
+            <field name="standard_price">80.0</field>
+        </record>
+        <record id="product_material_pipes" model="product.template">
+            <field name="name">Pipes</field>
+            <field name="type">consu</field>
+            <field name="standard_price">70.0</field>
+        </record>
+        <record id="product_material_valves" model="product.template">
+            <field name="name">Valves</field>
+            <field name="type">consu</field>
+            <field name="standard_price">120.0</field>
+        </record>
+        <record id="product_material_pumps" model="product.template">
+            <field name="name">Pumps</field>
+            <field name="type">consu</field>
+            <field name="standard_price">500.0</field>
+        </record>
+        <record id="product_material_burners" model="product.template">
+            <field name="name">Burners</field>
+            <field name="type">consu</field>
+            <field name="standard_price">800.0</field>
+        </record>
+        <record id="product_material_refractory" model="product.template">
+            <field name="name">Refractory</field>
+            <field name="type">consu</field>
+            <field name="standard_price">40.0</field>
+        </record>
+
+        <!-- Fabrication -->
+        <record id="product_fabrication_cutting" model="product.template">
+            <field name="name">Cutting</field>
+            <field name="type">service</field>
+            <field name="standard_price">20.0</field>
+        </record>
+        <record id="product_fabrication_rolling" model="product.template">
+            <field name="name">Rolling</field>
+            <field name="type">service</field>
+            <field name="standard_price">25.0</field>
+        </record>
+        <record id="product_fabrication_welding" model="product.template">
+            <field name="name">Welding</field>
+            <field name="type">service</field>
+            <field name="standard_price">30.0</field>
+        </record>
+        <record id="product_fabrication_machining" model="product.template">
+            <field name="name">Machining</field>
+            <field name="type">service</field>
+            <field name="standard_price">35.0</field>
+        </record>
+
+        <!-- Testing -->
+        <record id="product_testing_hydro" model="product.template">
+            <field name="name">Hydro Test</field>
+            <field name="type">service</field>
+            <field name="standard_price">100.0</field>
+        </record>
+        <record id="product_testing_ndt" model="product.template">
+            <field name="name">NDT Test</field>
+            <field name="type">service</field>
+            <field name="standard_price">200.0</field>
+        </record>
+        <record id="product_testing_ibr" model="product.template">
+            <field name="name">IBR Inspection</field>
+            <field name="type">service</field>
+            <field name="standard_price">300.0</field>
+        </record>
+
+        <!-- Logistics -->
+        <record id="product_logistics_packing" model="product.template">
+            <field name="name">Packing</field>
+            <field name="type">service</field>
+            <field name="standard_price">50.0</field>
+        </record>
+        <record id="product_logistics_transport" model="product.template">
+            <field name="name">Transport</field>
+            <field name="type">service</field>
+            <field name="standard_price">1000.0</field>
+        </record>
+        <record id="product_logistics_insurance" model="product.template">
+            <field name="name">Insurance</field>
+            <field name="type">service</field>
+            <field name="standard_price">150.0</field>
+        </record>
+    </data>
+</odoo>

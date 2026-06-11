@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Disable default Odoo stages -->
+        <record id="crm.stage_lead1" model="crm.stage">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="crm.stage_lead2" model="crm.stage">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="crm.stage_lead3" model="crm.stage">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="crm.stage_lead4" model="crm.stage">
+            <field name="active" eval="False"/>
+        </record>
+
+        <!-- Sequence 1: Lead Received -->
+        <record id="stage_lead_received" model="crm.stage">
+            <field name="name">Lead Received</field>
+            <field name="sequence">1</field>
+            <field name="is_won">False</field>
+        </record>
+
+        <!-- Sequence 2: Requirement Analysis -->
+        <record id="stage_requirement_analysis" model="crm.stage">
+            <field name="name">Requirement Analysis</field>
+            <field name="sequence">2</field>
+            <field name="is_won">False</field>
+        </record>
+
+        <!-- Sequence 3: Technical Discussion -->
+        <record id="stage_technical_discussion" model="crm.stage">
+            <field name="name">Technical Discussion</field>
+            <field name="sequence">3</field>
+            <field name="is_won">False</field>
+        </record>
+
+        <!-- Sequence 4: Budgetary Offer -->
+        <record id="stage_budgetary_offer" model="crm.stage">
+            <field name="name">Budgetary Offer</field>
+            <field name="sequence">4</field>
+            <field name="is_won">False</field>
+        </record>
+
+        <!-- Sequence 5: Commercial Offer -->
+        <record id="stage_commercial_offer" model="crm.stage">
+            <field name="name">Commercial Offer</field>
+            <field name="sequence">5</field>
+            <field name="is_won">False</field>
+        </record>
+
+        <!-- Sequence 6: Negotiation -->
+        <record id="stage_negotiation" model="crm.stage">
+            <field name="name">Negotiation</field>
+            <field name="sequence">6</field>
+            <field name="is_won">False</field>
+        </record>
+    </data>
+</odoo>

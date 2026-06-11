@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_boiler_estimation,boiler.estimation,model_boiler_estimation,base.group_user,1,1,1,1
+access_boiler_estimation_material,boiler.estimation.material,model_boiler_estimation_material,base.group_user,1,1,1,1
+access_boiler_estimation_fabrication,boiler.estimation.fabrication,model_boiler_estimation_fabrication,base.group_user,1,1,1,1
+access_boiler_estimation_testing,boiler.estimation.testing,model_boiler_estimation_testing,base.group_user,1,1,1,1
+access_boiler_estimation_logistics,boiler.estimation.logistics,model_boiler_estimation_logistics,base.group_user,1,1,1,1

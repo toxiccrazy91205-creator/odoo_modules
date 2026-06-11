@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence -->
+    <data noupdate="1">
+        <record id="seq_boiler_estimation" model="ir.sequence">
+            <field name="name">Boiler Estimation</field>
+            <field name="code">boiler.estimation</field>
+            <field name="prefix">EST/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+
+    <!-- List View (previously Tree) -->
+    <record id="view_boiler_estimation_list" model="ir.ui.view">
+        <field name="name">boiler.estimation.list</field>
+        <field name="model">boiler.estimation</field>
+        <field name="arch" type="xml">
+            <list string="Boiler Estimations">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="total_base_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="final_sales_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state == 'draft'" 
+                       decoration-warning="state in ('engineering', 'bom')" 
+                       decoration-primary="state == 'costing'" 
+                       decoration-success="state == 'done'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_boiler_estimation_form" model="ir.ui.view">
+        <field name="name">boiler.estimation.form</field>
+        <field name="model">boiler.estimation</field>
+        <field name="arch" type="xml">
+            <form string="Boiler Estimation">
+                <header>
+                    <button name="action_generate_quotation" string="Generate Quotation" type="object" class="oe_highlight" invisible="state != 'costing'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,engineering,bom,costing,done" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="sale_order_id" invisible="not sale_order_id"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Raw Materials" name="materials">
+                            <field name="material_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="unit_cost"/>
+                                    <field name="subtotal" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Fabrication" name="fabrication">
+                            <field name="fabrication_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="unit_cost"/>
+                                    <field name="subtotal" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Testing" name="testing">
+                            <field name="testing_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="unit_cost"/>
+                                    <field name="subtotal" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Logistics" name="logistics">
+                            <field name="logistics_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                    <field name="unit_cost"/>
+                                    <field name="subtotal" sum="Total"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Summary &amp; Margin" name="summary">
+                            <group>
+                                <group>
+                                    <field name="margin_percentage" widget="percentage"/>
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" name="estimation_total">
+                                    <field name="total_material_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_fabrication_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_testing_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_logistics_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="total_base_cost"/>
+                                    </div>
+                                    <field name="total_base_cost" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label" style="font-weight:bold; font-size:1.5em; color: #017e84;">
+                                        <label for="final_sales_price"/>
+                                    </div>
+                                    <field name="final_sales_price" nolabel="1" class="oe_subtotal_footer_separator" style="font-weight:bold; font-size:1.5em; color: #017e84;" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                            </group>
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_boiler_estimation" model="ir.actions.act_window">
+        <field name="name">Estimations</field>
+        <field name="res_model">boiler.estimation</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Boiler Estimation
+            </p>
+            <p>
+                Manage your costings for Raw Materials, Fabrication, Testing, and Logistics.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_boiler_costing_root" name="Boiler Costing" sequence="10"/>
+    <menuitem id="menu_boiler_estimations" name="Estimations" parent="menu_boiler_costing_root" action="action_boiler_estimation" sequence="10"/>
+</odoo>

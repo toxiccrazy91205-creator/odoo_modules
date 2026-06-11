@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- CRM Tags -->
+        <record id="crm_tag_website_inquiry" model="crm.tag">
+            <field name="name">Website Inquiry</field>
+            <field name="color">1</field>
+        </record>
+        <record id="crm_tag_export_inquiry" model="crm.tag">
+            <field name="name">Export Inquiry</field>
+            <field name="color">2</field>
+        </record>
+        <record id="crm_tag_direct_sales_team" model="crm.tag">
+            <field name="name">Direct Sales Team</field>
+            <field name="color">3</field>
+        </record>
+        <record id="crm_tag_dealer_network" model="crm.tag">
+            <field name="name">Dealer Network</field>
+            <field name="color">4</field>
+        </record>
+        <record id="crm_tag_reference" model="crm.tag">
+            <field name="name">Reference</field>
+            <field name="color">5</field>
+        </record>
+    </data>
+</odoo>
