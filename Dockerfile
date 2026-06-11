@@ -2,8 +2,8 @@ FROM odoo:19.0
 
 USER root
 
-# Install PostgreSQL inside the container
-RUN apt-get update && apt-get install -y postgresql postgresql-client && rm -rf /var/lib/apt/lists/*
+# Install PostgreSQL inside the container (version 18 matches the pre-installed client)
+RUN apt-get update && apt-get install -y postgresql-18 && rm -rf /var/lib/apt/lists/*
 
 # Copy Odoo Config
 COPY ./odoo.conf /etc/odoo/odoo.conf
