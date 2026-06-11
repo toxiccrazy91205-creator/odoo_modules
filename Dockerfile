@@ -9,5 +9,5 @@ COPY ./odoo.conf /etc/odoo/odoo.conf
 
 # Override the official entrypoint so it doesn't force the DB port to match Render's web PORT
 ENTRYPOINT []
-# Automatically initialize the default 'postgres' database on startup and inject environment variables safely
-CMD odoo -c /etc/odoo/odoo.conf -d postgres -i base --db_host "$PGHOST" --db_port "$PGPORT" --db_user "$PGUSER" --db_password "${PGPASSWORD:-$PASSWORD}" --http-port "${PORT:-10000}"
+# Run Odoo normally (Database initialization will be done manually via Render Shell)
+CMD odoo -c /etc/odoo/odoo.conf --db_host "$PGHOST" --db_port "$PGPORT" --db_user "$PGUSER" --db_password "${PGPASSWORD:-$PASSWORD}" --http-port "${PORT:-8069}"
